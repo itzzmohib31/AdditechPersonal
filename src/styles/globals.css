@@ -1,13 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+  @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto:wght@300&display=swap');
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 }
-
+*{
+  box-sizing: border-box;
+}
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
@@ -16,12 +18,22 @@
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.hero
+{
+  background-image: url('../assets/images/main.gif');
+}
+
+.contactus
+{
+  background-image: url('../assets/images/map-image.png');
+
+}
+.img
+{
+  width: 14rem;
+  height: 14rem;
+  border: 0.5rem solid rgba(0, 0, 0, 0.1);
+  border-radius: 50% !important;
+  vertical-align: middle;
+  margin: auto;
 }
