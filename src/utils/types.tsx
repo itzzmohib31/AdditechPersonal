@@ -3,7 +3,7 @@ import { ReactElement } from "react"
 
 export type dropdownDataType = {
     heading: string,
-    url?: string
+    url: string
     link?: string
     list?: {
         name: string,
@@ -35,3 +35,12 @@ export type sponsorsLinkType = {
     URL:string
 }[]
 
+export type servicePageType = {
+    
+    Title:string,
+    MainImg:StaticImageData
+    MainPara:[any],
+    ServicesList:[any],
+    SecondaryPara:[any]
+
+}[]

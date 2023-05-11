@@ -11,6 +11,20 @@ const Navigation =()=>{
 
      const [Expanded,setExpanded]=useState<'' | 'hidden'>('hidden');
      const [isOpened,setIsOpened]=useState(false);
+     const [Dropdown,setDropdown]=useState(false);
+
+     const ViewDropdown=(isDropdown:any)=>{
+        if(isDropdown)
+        {
+            setDropdown(true);
+        }
+     }
+     const HideDropdown=(isDropdown:any)=>{
+        if(isDropdown)
+        {
+            setDropdown(false);
+        }
+     }
 
     const hamburgerToggle=()=>{
         (Expanded=='hidden')?setExpanded(''):setExpanded('hidden');
@@ -32,16 +46,31 @@ const Navigation =()=>{
             </div>
        
 
-            <nav className={`md:bg-White md:w-3/4 md:font-normal md:flex md:static md:top-0 md:text-md  top-19 right-0   bg-Red  absolute w-full left-0 font-bold font-sans  text-lg p-1 ${Expanded}  transition-all ease-in duration-500`}>
+            <nav className={`md:bg-White md:w-3/4 md:font-normal md:flex md:static md:top-0 md:text-md  top-19 right-0   bg-Gray  absolute w-full left-0 font-bold font-sans  text-lg p-1 ${Expanded}  transition-all ease-in duration-500`}>
                 {menuList.map((item,index)=>{
                 return(
                     <li key={index} className="md:mx-4 list-none p-1 my-6 ">
-                        <Link className=" hover:text-Red duration-500" href={item.link}>
+                        <Link onClick={()=>ViewDropdown(item.isDropdown)} onMouseOver={()=>ViewDropdown(item.isDropdown)} className=" hover:text-Red duration-500" href={item.link}>
                             {item.name}
                         </Link>
+                        {item.isDropdown&&Dropdown&&<div onMouseLeave={()=>HideDropdown(item.isDropdown)} className="flex flex-col md:absolute bg-Gray z-10 p-8">
+                            {
+                            item.dropdownData?.map((child,i)=>{
+                                    return(
+                                    <Link className="p-2  hover:text-Red duration-500" href={child.url}>
+                                        {child.heading}
+                                    </Link>
+                                    )
+                                })
+                            }
+                            </div>
+                        }
+                       
                     </li>
+                    
                 )})}
             </nav>
+
         </header>
     )
 
