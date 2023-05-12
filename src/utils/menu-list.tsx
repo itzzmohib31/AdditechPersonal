@@ -13,13 +13,17 @@ export const menuList:menuListType=[
     dropdownData:[
         {
             heading:'RL Tool',
-            url:'/'
+            url:'/RL Tool'
         },
         {
             heading:'Validation Tool',
-            url:'/'
+            url:'/Validation Tool'
         },
     ]
+},
+{
+    name:'Tools',
+    link:'/Tools'
 },
 {
     name:'About',

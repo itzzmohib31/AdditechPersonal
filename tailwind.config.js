@@ -11,7 +11,15 @@ module.exports = {
       'Matte':'#212529',
       'Gray':'#f8f9fa',
       'White':'#fff',
-      'Gray-100':'#6c757d'
+      'Gray-100':'#6c757d',
+      'Blue-500':'#3b82f6',
+      'Blue-400':'#60a5fa',
+      'Blue-300':'#93c5fd',
+      'Blue-200':'#bfdbfe',
+      'Blue-100':'#dbeafe',
+      'Blue-600':'#2563eb',
+
+
     },
     fontFamily: {
       sans: ['Roboto', 'sans-serif'],

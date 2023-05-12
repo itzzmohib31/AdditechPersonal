@@ -53,7 +53,7 @@ const Navigation =()=>{
                         <Link onClick={()=>ViewDropdown(item.isDropdown)} onMouseOver={()=>ViewDropdown(item.isDropdown)} className=" hover:text-Red duration-500" href={item.link}>
                             {item.name}
                         </Link>
-                        {item.isDropdown&&Dropdown&&<div onMouseLeave={()=>HideDropdown(item.isDropdown)} className="flex flex-col md:absolute bg-Gray z-10 p-8">
+                        {item.isDropdown&&Dropdown&&<div onMouseLeave={()=>HideDropdown(item.isDropdown)} className="left-0 top-20 flex md:flex-row w-full flex-col md:absolute bg-Gray z-10 p-6">
                             {
                             item.dropdownData?.map((child,i)=>{
                                     return(
