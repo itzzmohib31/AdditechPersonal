@@ -8,7 +8,7 @@ const ServicePage=(props:any)=>{
     return(
         <section>
         <Navigation></Navigation>
-
+{/* 
         <div className='bg-left flex-col md:p-40 bg-cover hero font-Montserrat '>
         <h2 className='mt-5 md:text-7xl  leading-tight font-bold text-White text-center text-5xl '>{props.serviceData.Title}</h2>
         </div>
@@ -58,7 +58,7 @@ const ServicePage=(props:any)=>{
                     </div>
         
     
-    
+     */}
         </section>
     )
 }
