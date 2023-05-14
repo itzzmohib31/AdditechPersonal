@@ -1,0 +1,153 @@
+.TableContainer
+{
+    display: flex;
+    flex-direction: row;
+}
+.Table1
+{
+    box-shadow: 0 1px 4px 0 rgb(0 0 0 / 14%);
+    width:40%;
+    background-color: #ffffff;
+    margin: auto;
+    margin-top: 2rem;
+    border-radius: .5rem;
+}
+.header
+{
+    background:linear-gradient(60deg, hsl(1, 83%, 63%), hsl(1, 77%, 55%));
+    box-shadow: 0 4px 20px 0 rgb(0 0 0 / 14%), 0 7px 10px -5px rgb(244 67 54 / 40%);
+    width: 30%;
+    margin: auto;
+    position: absolute;
+    color: white;
+    transform: translate(15%,-30%);
+    margin: auto;
+    background:#8b0000;
+    border-radius: .2rem;
+}
+.header h2
+{
+    text-align: center;
+}
+.Visualization
+{
+    display: flex;
+    margin-top: 5rem;
+
+}
+.graphcontainer
+{
+    box-shadow: 0 1px 4px 0 rgb(0 0 0 / 14%);
+    background-color: white;
+    background: white;
+    width: 40%;
+    border-radius: .5rem;
+    margin: 4rem;
+
+}
+.Result1Container
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: center;
+  align-items: center;
+}
+
+#HalpinTable {
+    grid-column: 1 / -1;
+    grid-row: 3 / 3;
+    width: 40%;
+  }
+
+
+
+
+.SliderCont
+{
+    background:#8b0000;
+    width: 100%;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    box-shadow: 0 4px 20px 0 rgb(0 0 0 / 14%), 0 7px 10px -5px rgb(244 67 54 / 40%);
+    margin-top: 2rem;
+}
+.Slider
+{
+    width: 30%;
+    color: white;
+}
+
+.Table2
+{
+    box-shadow: 0 1px 4px 0 rgb(0 0 0 / 14%);
+    width:80%;
+    background-color: #ffffff;
+    margin: auto;
+    margin-top: 5rem;
+    border-radius: .5rem;
+
+}
+.header2
+{
+    background:linear-gradient(60deg, hsl(1, 83%, 63%), hsl(1, 77%, 55%));
+    box-shadow: 0 4px 20px 0 rgb(0 0 0 / 14%), 0 7px 10px -5px rgb(244 67 54 / 40%);
+    width: 30%;
+    margin: auto;
+    position: absolute;
+    color: white;
+    transform: translate(15%,-30%);
+    margin: auto;
+    background:#8b0000;
+    border-radius: .2rem;
+}
+.header2 h2
+{
+    text-align: center;
+}
+
+
+@media(max-width:900px)
+{
+    .TableContainer{
+        flex-direction: column;
+    }
+    .Table1,.Table2,#HalpinTable
+    {
+        width: 90%;
+    }
+    .header,.header2
+    {
+        width: 65%;
+    }
+    .Slider
+    {
+        margin: auto;
+        width: 70%;
+    }
+    .graphcontainer
+    {
+        width: 90%;
+        margin: auto;
+        margin-top: 5rem;
+    }
+    .Visualization
+    {
+        flex-direction: column;
+    }
+    .SliderCont{
+        flex-direction: column;
+        margin: auto;
+        width: 90%;
+        margin-top: 2rem;
+        text-align: center;
+    }
+    .Result1Container
+    {
+        display: flex;
+        flex-direction: column;
+    }
+}
+

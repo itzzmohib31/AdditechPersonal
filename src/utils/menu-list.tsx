@@ -23,7 +23,7 @@ export const menuList:menuListType=[
 },
 {
     name:'Tools',
-    link:'/Tools'
+    link:'/LOM'
 },
 {
     name:'About',

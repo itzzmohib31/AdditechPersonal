@@ -39,8 +39,8 @@ export type servicePageType = {
     
     Title:string,
     MainImg:StaticImageData
-    MainPara:[any],
-    ServicesList:[any],
-    SecondaryPara:[any]
+    MainPara:any,
+    ServicesList:any,
+    SecondaryPara:any
 
 }[]

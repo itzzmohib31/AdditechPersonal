@@ -18,6 +18,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/LOM.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/LOM.jsx", "src/components/LOM/Tables.jsx", "src/components/LOM/Datagrid.jsx", "src/components/LOM/Visualization.jsx", "src/components/LOM/Dropdown.jsx"],
   "exclude": ["node_modules"]
 }

@@ -1,24 +1,25 @@
 import React, { useEffect, lazy, Suspense } from 'react'
-import Data from '../../Constants/LOMData.json';
-import Dropdown from '../pages/Components/Dropdown'
-import Tables from './Components/Tables';
-import Styles from './Styles/LOM.module.css'
+import Data from '../utils/LOMData.json';
+import Dropdown from '../components/LOM/Dropdown'
+import Tables from '../components/LOM/Tables';
 import { useCallback, useState } from 'react';
 import Slider from '@mui/material/Slider';
+import GridTable from '../components/LOM/Datagrid';
+import Styles from '../styles/LOM.module.css';
 import Box from '@mui/material/Box';
-import '@fontsource/roboto/300.css';
-import GridTable from './Components/GridTable';
-let MyPlot = lazy(() => import("./Components/Visualization"))
+import Navigation from '@/components/navigation';
+let MyPlot = lazy(() => import("../components/LOM/Visualization"))
 
 
 
 const LOM = () => {
+
   console.log(Data);
   const [ResinValue, setResinValue] = useState('');
   const [FabricValue, setFabricValue] = useState('');
   const [vfr, setVFR] = useState(0);
-  const [RuleOfMixData, setRuleOfMixData] = useState({});
-  const [ChamisData, setChamisData] = useState({});
+  const [RuleOfMixData, setRuleOfMixData] = useState({}); ///
+  const [ChamisData, setChamisData] = useState({}); ///
   const [HalpinData, setHalpinData] = useState({});
   const [MechanicalProp1, setMechanicalProp1] = useState({});
   const [MechanicalProp2, setMechanicalProp2] = useState({});
@@ -27,18 +28,18 @@ const LOM = () => {
 
   //SET DATA FOR GRAPH
   const [E22LOM, setE22LOM] = useState([]);
-  const [E22Chamis, setE22Chamis] = useState([]);
+  const [E22Chamis, setE22Chamis] = useState ([]);
   const [E22Halpin, setE22Halpin] = useState([]);
-  const [G12LOM, setG12LOM] = useState([]);
-  const [G12Chamis, setG12Chamis] = useState([]);
-  const [G12Halpin, setG12Halpin] = useState([]);
-  const [F11TC, setF11TC] = useState([]);
-  const [F11CMin, setF11CMin] = useState([]);
-  const [F22C, setF22C] = useState([]);
-  const [F22T, setF22T] = useState([]);
-  const [F12C, setF12C] = useState([]);
+  const [G12LOM, setG12LOM] = useState ([]);
+  const [G12Chamis, setG12Chamis] = useState  ([]);
+  const [G12Halpin, setG12Halpin] = useState  ([]);
+  const [F11TC, setF11TC] = useState ([]);
+  const [F11CMin, setF11CMin] = useState  ([]);
+  const [F22C, setF22C] = useState ([]);
+  const [F22T, setF22T] = useState ([]);
+  const [F12C, setF12C] = useState ([]);
 
-  const [VFF, setVFF] = useState([]);
+  const [VFF, setVFF] = useState ([]);
 
 
 
@@ -73,7 +74,7 @@ const LOM = () => {
     let F11C_Split_T = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     let F11C_Shear_T = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     let F11C_buck_T = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    let mode_T = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    let mode_T = [];
     let min = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     let MechProp1 = [];
     let MechProp2 = [];
@@ -92,42 +93,30 @@ const LOM = () => {
     const Fibre = Data.fibre[FabricValue];
     const Resin = Data.resin[ResinValue];
 
-    let Chamis = {
-      E22_Ch: '',
-      G12_Ch: '',
-    }
 
-    let Halpin = {
-      E22_HT: '',
-      G12_HT: '',
-    }
     if (Fibre && Resin) {
-      //E11 Longitudinal - law of mixtures
-      RuleOMix.E11 = Fibre.E11F * vfr + Resin.E * (1 - vfr);
-      //E22 Transverse - inverse law of mixtures
-      RuleOMix.E22 = Fibre.E22F * Resin.E / (vfr * Resin.E + (1 - vfr) * Fibre.E22F);
-      //G12 Longitudinal - inverse law of mixtures
-      RuleOMix.G12 = Fibre.G12F * Resin.G / (vfr * Resin.G + (1 - vfr) * Fibre.G12F);
-      //G21 Transverse - law of mixtures
-      //v12 Longitudinal - law of mixtures
-      RuleOMix.V12 = Fibre.V12F * vfr + Resin.v * (1 - vfr);
-      setRuleOfMixData(RuleOMix);
 
-      //E22 Transverse - CHAMIS
-      Chamis.E22_Ch = Resin.E * ((1 - Math.sqrt(vfr)) + (Math.sqrt(vfr) / (1 - Math.sqrt(vfr) * (1 - Resin.E / Fibre.E22F))));
-      //G12 Transverse - CHAMIS
-      Chamis.G12_Ch = Resin.G * ((1 - Math.sqrt(vfr)) + (Math.sqrt(vfr) / (1 - Math.sqrt(vfr) * (1 - Resin.G / Fibre.G12F))));
-      setChamisData(Chamis);
+
+      setRuleOfMixData({
+        E11: Fibre.E11F * vfr + Resin.E * (1 - vfr),
+        E22: Fibre.E22F * Resin.E / (vfr * Resin.E + (1 - vfr) * Fibre.E22F),
+        G12: Fibre.G12F * Resin.G / (vfr * Resin.G + (1 - vfr) * Fibre.G12F),
+        V12: Fibre.V12F * vfr + Resin.v * (1 - vfr)
+      });
+
+      setChamisData({
+        E22_Ch: Resin.E * ((1 - Math.sqrt(vfr)) + (Math.sqrt(vfr) / (1 - Math.sqrt(vfr) * (1 - Resin.E / Fibre.E22F)))),
+        G12_Ch: Resin.G * ((1 - Math.sqrt(vfr)) + (Math.sqrt(vfr) / (1 - Math.sqrt(vfr) * (1 - Resin.G / Fibre.G12F))))
+      });
 
       let ETA = 2;
-      //E22 Transverse - HALPIN-TSAI
       let NITA_E22 = ((Fibre.E22F / Resin.E) - 1) / ((Fibre.E22F / Resin.E) + ETA);
-      Halpin.E22_HT = Resin.E * (1 + ETA * NITA_E22 * vfr) / (1 - NITA_E22 * vfr);
-      //G12 Transverse - HALPIN-TSAI
       let NITA_G12 = ((Fibre.G12F / Resin.G) - 1) / ((Fibre.G12F / Resin.G) + ETA);
-      Halpin.G12_HT = Resin.G * (1 + ETA * NITA_G12 * vfr) / (1 - NITA_G12 * vfr);
 
-      setHalpinData(Halpin);
+      setHalpinData({
+        E22_HT: Resin.E * (1 + ETA * NITA_E22 * vfr) / (1 - NITA_E22 * vfr),
+        G12_HT: Resin.G * (1 + ETA * NITA_G12 * vfr) / (1 - NITA_G12 * vfr)
+      });
 
 
 
@@ -347,8 +336,9 @@ const LOM = () => {
   return (
 
     <div>
-
+           <Navigation/>
       <div className={Styles.TableContainer}>
+        
 
         <div className={Styles.Table1}>
           <span className={Styles.header}>
@@ -360,8 +350,6 @@ const LOM = () => {
           </div>
 
         </div>
-
-
 
         <div className={Styles.Table1}>
           <span className={Styles.header}>
@@ -453,17 +441,18 @@ const LOM = () => {
         </div>
 
 
-        <div style={{ display: 'flex', justifyContent: 'space-around', width: '100%' }}>
-
+        <div  className='md:flex justify-center'>
+          {/* <div className='w-full'> 
           <GridTable data={HomoCompositesFailure} />
+
+          </div> */}
 
           <div className={Styles.Table2} id={Styles.HalpinTable}>
             <span className={Styles.header2}>
               <h2>Failure: Homogenised composite for specified Vf</h2>
             </span>
             <div>
-              <br></br>
-              <br></br>
+              
 
               {<Tables style={{ marginTop: '2rem' }} data={FailureComposite} ></Tables>}
             </div>
@@ -482,14 +471,14 @@ const LOM = () => {
 
       <Suspense fallback={<p>loading</p>}>
 
-        <div className={Styles.MyPlot}>
-          <Box className={Styles.graphcontainer}>
+        <div className={'md:w-25 w-full justify-around md:flex pt-40'}>
+          <Box >
 
             <MyPlot Vfr={VFF} label1={"E22 (ILOM)"} label2={"E22 (Chamis)"} label3={"E22 (Haplin)"} data1={E22LOM} data2={E22Halpin} data3={E22Chamis}></MyPlot>
 
           </Box>
 
-          <Box className={Styles.graphcontainer}>
+          <Box>
 
             <MyPlot Vfr={VFF} label1={"G12 (ILOM)"} label2={"G12 (Chamis)"} label3={"G12 (Haplin)"} data1={G12LOM} data2={G12Halpin} data3={G12Chamis}></MyPlot>
 
@@ -498,14 +487,14 @@ const LOM = () => {
         </div>
 
 
-        <div className={Styles.MyPlot}>
-          <Box className={Styles.graphcontainer}>
+        <div className={'md:w-25 justify-around w-full md:flex pt-20'}>
+          <Box>
 
             <MyPlot Vfr={VFF} label1={"F11-T"} label2={"F11-C Min"} label3={" "} data1={F11TC} data2={F11CMin} data3={F11CMin}></MyPlot>
 
           </Box>
 
-          <Box className={Styles.graphcontainer}>
+          <Box>
 
             <MyPlot label1={"F22T"} label2={"F22C"} label3={"F12"} Vfr={VFF} data1={F22C} data2={F22T} data3={F12C}></MyPlot>
 

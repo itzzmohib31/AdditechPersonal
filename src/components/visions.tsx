@@ -1,7 +1,7 @@
 import VisionCover from '../assets/images/vision.gif';
 import Image from 'next/image';
 import { text } from 'stream/consumers';
-import { Tables } from './LOM/Tables';
+
 const Visions=()=>{
 
     return(
@@ -17,7 +17,6 @@ const Visions=()=>{
 
         </div>
 
-        {/* <Tables></Tables> */}
       
         </section>
     )
